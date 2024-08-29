@@ -1,0 +1,41 @@
+<div class="col gap-1">
+  <div class="col full-center">
+    <div class="col gap-1 space-between">
+      <ng-container *ngFor="let t of completedTasks">
+        <div [class.completed]="t.completed" class="task">
+          <app-task
+            [task]="t"
+            (edit)="onEdit($event)"
+            (delete)="onDelete($event)"
+            (confirm)="onConfirmEdit($event)"
+          ></app-task>
+        </div>
+      </ng-container>
+
+      <ng-container *ngFor="let t of notcompletedTasks">
+        <div [class.completed]="t.completed" class="task">
+          <app-task
+            [task]="t"
+            (edit)="onEdit($event)"
+            (delete)="onDelete($event)"
+            (confirm)="onConfirmEdit($event)"
+          ></app-task>
+        </div>
+      </ng-container>
+
+      <div class="row gap-1">
+        <!-- add fake check box -->
+        <input type="checkbox" class="fake-checkbox" />
+        <input
+          type="text"
+          placeholder="Enter task"
+          [(ngModel)]="newTask"
+          name="newTask"
+          (keyup.enter)="addnewTask($event)"
+        />
+      </div>
+    </div>
+    <!-- add task input box -->
+    <br />
+  </div>
+</div>

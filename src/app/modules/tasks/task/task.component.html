@@ -1,0 +1,54 @@
+<div class="row gap-1 wrapper">
+  <!-- task checkmark -->
+  <div class="row gap-05">
+    <input
+      type="checkbox"
+      [checked]="task.completed"
+      (change)="toggleTaskCompletion(task)"
+      pCheckboxIcon
+    />
+  </div>
+  <!-- task details normal text -- change only if double click-->
+  <div class="row gap-05">
+    <div
+      class="full-center"
+      *ngIf="!editing"
+      (dblclick)="toggleEdit(task)"
+      [ngClass]="{ completed: task.completed }"
+    >
+      <p
+        class="size-1 m-0 pbt-10"
+        [style.textDecoration]="task.completed ? 'line-through' : 'none'"
+      >
+        {{ task.task }}
+      </p>
+    </div>
+    <!-- task details input text -- change only if enter key pressed-->
+    <input
+      *ngIf="editing"
+      type="text"
+      [value]="task.task"
+      [(ngModel)]="value"
+      (keyup.enter)="updateTask($event, value, task)"
+      (keyup.escape)="toggleEdit(task)"
+    />
+  </div>
+  <!-- delete task button -->
+  <div class="row gap-05">
+    <p-button
+      icon="pi pi-trash"
+      [text]="true"
+      severity="danger"
+      (click)="confirmDelete(task)"
+      class="size-1 m-0 pbt-10"
+    />
+    <!-- <button
+      type="button"
+      pButton
+      icon="pi pi-trash"
+      (click)="confirmDelete(task)"
+      class="p-button-danger"
+      #deleteButton
+    ></button> -->
+  </div>
+</div>
